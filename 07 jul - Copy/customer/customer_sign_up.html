@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
     <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/customer_sign_up.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header class="main-header">
@@ -27,53 +29,93 @@
             </ul>
         </nav>
     </header>
-    <div class="main-content_register">
-        <div class="form-container">
-            <form id="registrationForm" method="post" action="customer_registration.php">
-                <div class="input-group">
-                    <label for="firstName">First Name*</label>
-                    <input type="text" id="firstName" name="firstName">
+    <div class="container">
+        <form id="Form1">
+            <h3>CREATE ACCOUNT</h3>
+            <h3>Personal Information</h3>
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" placeholder="First Name" required>
+            <small class="error-message" id="firstNameError"></small>
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" placeholder="Last Name" required>
+            <small class="error-message" id="lastNameError"></small>
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Email" required>
+            <small class="error-message" id="emailError"></small>
+            <label for="password">Password</label>
+            <div class="password-container">
+                <input type="password" id="password" placeholder="Password" required>
+                <div class="password-toggle" id="togglePassword">
+                    <i class="fas fa-eye"></i>
                 </div>
-
-                <div class="input-group">
-                    <label for="lastName">Last Name*</label>
-                    <input type="text" id="lastName" name="lastName">
+            </div>
+            <div id="passwordRequirements">
+                <small>Password must contain:</small>
+                <ul>
+                    <li id="letter" class="invalid"><span class="indicator">✗</span> At least 4 letters</li>
+                    <li id="number" class="invalid"><span class="indicator">✗</span> At least 1 number</li>
+                    <li id="special" class="invalid"><span class="indicator">✗</span> At least 1 special character (e.g., !@#$%^&*)</li>
+                </ul>
+            </div>
+            <label for="confirmPassword">Confirm Password</label>
+            <div class="password-container">
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                <div class="password-toggle" id="toggleConfirmPassword">
+                    <i class="fas fa-eye"></i>
                 </div>
-
-                <div class="input-group">
-                    <label for="email">E-mail Address*</label>
-                    <input type="email" id="email" name="email">
-                </div>
-
-                <div class="input-group">
-                    <label for="password">Password*</label>
-                    <div class="password-container">
-                        <input type="password" id="password" name="password">
-                        <span class="show-password" onclick="togglePassword('password', this)">Show</span>
-                    </div>
-                </div>
-
-                <div class="input-group">
-                    <label for="confirmPassword">Confirm Password*</label>
-                    <div class="password-container">
-                        <input type="password" id="confirmPassword" name="confirmPassword">
-                        <span class="show-password" onclick="togglePassword('confirmPassword', this)">Show</span>
-                    </div>
-                </div>
-
-                <div class="actions">
-                    <button type="submit">Continue</button>
-                </div>
-            </form>
+            </div>
+            <small class="error-message" id="confirmPasswordError"></small>
+            <div class="btn-box">
+                <button type="button" id="Next1">Next</button>
+            </div>
+        </form>
+        <form id="Form2">
+            <h3>CONTACT INFO</h3>
+            <label for="contactNo">Contact No</label>
+            <input type="text" id="contactNo" placeholder="(xxx) xxx - xxxx" required>
+            <small class="error-message" id="contactNoError"></small>
+            <label for="profileImage">Profile Image</label>
+            <input type="file" id="profileImage" placeholder="Profile Image">
+            <div class="btn-box">
+                <button type="button" id="Back1">Back</button>
+                <button type="button" id="Next2">Next</button>
+            </div>
+        </form>
+        <form id="Form3" action="cust_signup_submit_form.php" method="POST" enctype="multipart/form-data">
+            <h3>Driver's License Information</h3>
+            <label for="licenseNumber">Driver's License Number</label>
+            <input type="text" id="licenseNumber" name="licenseNumber" placeholder="Driver's License Number" required>
+            <small class="error-message" id="licenseNumberError"></small>
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob" placeholder="Date of Birth" required>
+            <small class="error-message" id="dobError"></small>
+            <input type="hidden" id="firstNameField" name="firstName">
+            <input type="hidden" id="lastNameField" name="lastName">
+            <input type="hidden" id="emailField" name="email">
+            <input type="hidden" id="passwordField" name="password">
+            <input type="hidden" id="contactNoField" name="contactNo">
+            <input type="hidden" id="profileImagePathField" name="profileImagePath">
+            <div class="btn-box">
+                <button type="button" id="Back2">Back</button>
+                <button type="button" id="Next3">Next</button>
+            </div>
+        </form>
+        <form id="Form4">
+            <h3>Driver's License Verification Details</h3>
+            <div id="verificationDetails"></div>
+            <div class="btn-box">
+                <button type="button" id="Back3">Back</button>
+                <button type="button" id="Complete">Complete</button>
+            </div>
+        </form>
+        <div class="step-row">
+            <div id="progress"></div>
+            <div class="step-col"><small>Step 1</small></div>
+            <div class="step-col"><small>Step 2</small></div>
+            <div class="step-col"><small>Step 3</small></div>
+            <div class="step-col"><small>Step 4</small></div>
         </div>
     </div>
-    <script>
-        function togglePassword(fieldId, toggleButton) {
-            var field = document.getElementById(fieldId);
-            var type = field.getAttribute("type") === "password" ? "text" : "password";
-            field.setAttribute("type", type);
-            toggleButton.textContent = type === "password" ? "Show" : "Hide";
-        }
-    </script>
+    <script src="../scripts/cust_signup_script.js"></script>
 </body>
 </html>
