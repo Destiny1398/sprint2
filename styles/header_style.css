@@ -1,0 +1,106 @@
+/* styles.css */
+/* CSS Reset */
+
+/* General Reset and Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+/* Header Styling */
+.main-header {
+    background-color: #e9e2e2;
+    width: 100%;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 30px;
+    box-sizing: border-box;
+}
+
+/* Logo Styling */
+.logo h1 {
+    margin: 0;
+    margin-left: 180%;
+    font-size: 30px;
+}
+
+.logo a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+/* Dropdown Menu Styling */
+.main-nav .nav-list {
+    list-style: none;
+    margin-right: 80px;
+    padding: 0;
+    display: flex;
+}
+
+.main-nav .nav-item {
+    position: relative;
+    margin-left: 30px;
+}
+
+.main-nav .nav-link {
+    color: #000000;
+    text-decoration: none;
+    padding: 5px 14px;
+    outline: none;
+    font-weight: bold;
+}
+
+.main-nav .nav-link:focus {
+    outline: none;
+}
+
+.main-nav .nav-link:hover,
+.main-nav .dropbtn:hover {
+    color: rgb(92, 92, 224);
+}
+
+/* Arrow Indicator for Dropdown */
+.main-nav .dropbtn::after {
+    content: ' ▼';
+    font-size: 0.8rem;
+}
+
+/* Dropdown Content Styling */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    z-index: 1000;
+    min-width: 160px;
+    border-radius: 5px;
+    margin-top: 15px;
+    margin-left: -80px;
+}
+
+.dropdown-content .dropdown-link {
+    color: white;
+    padding: 16px 16px;
+    text-decoration: none;
+    display: block;
+    outline: none;
+}
+
+.dropdown-content .dropdown-link:hover {
+    background-color: rgb(0, 0, 0);
+    color: rgb(92, 92, 224);
+}
+
+.dropdown:hover .dropdown-content,
+.dropdown-content:hover {
+    display: block;
+}
+
+.main-nav .nav-item:hover .dropdown-content,
+.main-nav .nav-item:focus-within .dropdown-content {
+    display: block;
+}
